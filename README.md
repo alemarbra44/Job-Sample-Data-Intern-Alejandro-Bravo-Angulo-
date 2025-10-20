@@ -27,19 +27,23 @@ La lógica del codigo para esta parte es tomar el nombre del país e introducir 
 
 
 # Part 2 - Data Visualization & Insights
+# Se eligió la opción 2: Automation option
 Se crea un script para mostrar estadísticas y gráfica en el nnismo colab donde estoy trabajando el código de la parte 1.
 Además de la librería pandas ya explicada en la parte 1, se usa la librería matplotlib.pyplot, para crear gráficos y visualizar datos en python. Se proponen 3 diferentes formas de visualizar los datos con sus respectivos insights.
 
  1.Conteo por país: 
-Muestra cuantas veces aparece cada país en la columna Country Presence, cada barra representa un pais, su altura son personas o campañas acociadas.
-  insight 1: Claramente hay un severo caso falta de registros, esto hace que sea imposible saber en qué país se tiene más presencia realmente, aunque la segunda opción con mayor cantidad es colombia, facilmente podría ese no ser el país con más precencia debido a la gran cantidad de paises no registrados. Se deben implementar medidas para garantizar un registro más completo, como no poder mandar los informes sin la información completa, además de una mejor capacitación de quienes debe llevar los registros para verificar qué datos incluyen y cuales faltan.
+Muestra cuantas veces aparece cada país en la columna Country Presence, cada barra representa un pais, su altura son personas o campañas acociadas. La lógica del código es tomar la columna Country Presence del dataframe y buscar los 10 países con más registros. Con "plot(kind='bar')" se establece que sea un gráfico de barras. Luego se ponen los números con los valores exactos en cada barra usando una función "for" que pone el conteo de valores sobre las barras.
+
+   insight 1: Claramente hay un severo caso falta de registros, esto hace que sea imposible saber en qué país se tiene más presencia realmente, aunque la segunda opción con mayor cantidad es colombia, facilmente podría ese no ser el país con más precencia debido a la gran cantidad de paises no registrados. Se deben implementar medidas para garantizar un registro más completo, como no poder mandar los informes sin la información completa, además de una mejor capacitación de quienes debe llevar los registros para verificar qué datos incluyen y cuales faltan.
 
  2.Campañas por categoría:
-Muestra cuántas campañas hay por cada categoría en un gráfico de barras horizontal
+Muestra cuántas campañas hay por cada categoría en un gráfico de barras horizontal. La lógica del código es la misma que en el Conteo por país.
+
   insight 2: Las campañas de "tech" son las más numerosas con porcentaje de 58.44%, mientras que las de "tech; fundraising" solo llegan a 22.99% siendo menos de la mitad de "tech", pero se ve que hay un 18.58% sin registrar, pero sin importar de cual tipo sean los sin registrar, "tech" seguría siendo la categoría con más registros, aunque sin la información de los no registrados nos estamos perdiendo de otra áreas en las que podríamos tener precensia.
 
  3.Relación entre registro y asistencia
-Muestra tabla de contingencia (crosstab) para cruzar dos columnas: Registered (personas que se registraron) y Attended (personas que asistieron). Esto muestra cuantos registrados realmente asistieron y cuántos no
+Muestra tabla de contingencia (crosstab) para cruzar dos columnas: Registered (personas que se registraron) y Attended (personas que asistieron). Esto muestra cuantos registrados realmente asistieron y cuántos no. Se construye una tabla cruzada entre las columnas "Registered" y "Attended" usando "df_api.groupby(["Registered", "Attended"])" para agrupar las filas según las combinaciones posibles de esas dos columnas. En este caso son 4 posibles combinaciones: asistió y se registró, asistió pero no se registró, no asistió ni se registró, y no se registró pero sí asistió. Con "unstack" son convierten en columnas separadas para graficarlas usando "plot".
+
   insight 3: Se ve que hubo mayor cantidad de gente presente registrada que no registrada, pero de la gente que se llegó a registrar la mayor parte no asistió, lo que nos da un 40.82% de asistencia de parte de los asistentes registrados. Por lo tanto lo recomendable es implementar un sistema de recordatorios por correo o llamada a los participantes registrados.
 
 
